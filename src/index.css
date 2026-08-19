@@ -1,0 +1,996 @@
+@import "tailwindcss";
+
+/* =========================================================
+   KONGU NILA MATRIMONY
+   SOFT & SWEET GLOBAL DESIGN SYSTEM
+   Tailwind CSS v4
+   ========================================================= */
+
+/* ---------- Dark Mode ---------- */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+/* =========================================================
+   BRAND COLORS
+========================================================= */
+
+:root {
+  /* Primary brand */
+  --brand-primary: #8B3A4A;
+  --brand-primary-hover: #6F2939;
+  --brand-primary-deep: #4A1F2A;
+
+  /* Soft romantic tones */
+  --brand-rose: #C98291;
+  --brand-rose-light: #E8BFC7;
+  --brand-rose-soft: #F4E4E7;
+
+  /* Gold */
+  --brand-gold: #D6B56A;
+  --brand-gold-light: #E8D39A;
+  --brand-gold-soft: #F7EFD9;
+
+  /* Light surfaces */
+  --brand-cream: #FCF8F5;
+  --brand-surface: #FFFDFC;
+  --brand-surface-soft: #FAF3F1;
+
+  /* Text */
+  --brand-text: #3A2A2D;
+  --brand-muted: #76666A;
+
+  /* Borders */
+  --brand-border: rgba(139, 58, 74, 0.12);
+  --brand-border-gold: rgba(214, 181, 106, 0.25);
+
+  /* Dark theme */
+  --brand-dark-bg: #171013;
+  --brand-dark-surface: #21171A;
+  --brand-dark-surface-soft: #281B1F;
+  --brand-dark-text: #F5E9E5;
+  --brand-dark-muted: #C9B8B8;
+}
+
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+html {
+  scroll-behavior: smooth;
+  min-width: 320px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--brand-cream);
+  color: var(--brand-text);
+
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark body {
+  background: var(--brand-dark-bg);
+  color: var(--brand-dark-text);
+}
+
+
+/* =========================================================
+   IMAGES
+========================================================= */
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+========================================================= */
+
+input,
+textarea,
+select {
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: rgba(139, 58, 74, 0.18);
+  color: var(--brand-primary-deep);
+}
+
+
+/* =========================================================
+   BRAND TYPOGRAPHY
+========================================================= */
+
+.font-serif-brand {
+  line-height: 1.2;
+}
+
+.font-tamil {
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   COMMON PAGE CONTAINER
+========================================================= */
+
+.page-container {
+  width: 100%;
+  max-width: 1280px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+/* =========================================================
+   COMMON MATRIMONY COMPONENTS
+========================================================= */
+
+.card-matrimonial {
+  border-radius: 1.25rem;
+
+  background: var(--brand-surface);
+
+  border: 1px solid var(--brand-border);
+
+  box-shadow:
+    0 8px 30px rgba(74, 31, 42, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card-matrimonial:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 35px rgba(74, 31, 42, 0.08);
+
+  border-color: rgba(139, 58, 74, 0.18);
+}
+
+
+.glass-matrimonial {
+  background: rgba(255, 253, 252, 0.82);
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 8px 30px rgba(74, 31, 42, 0.05);
+}
+
+
+/* =========================================================
+   SOFT BRAND UTILITIES
+========================================================= */
+
+.brand-gradient {
+  background:
+    linear-gradient(
+      135deg,
+      #8B3A4A 0%,
+      #754052 50%,
+      #4A1F2A 100%
+    );
+}
+
+.brand-gradient-soft {
+  background:
+    linear-gradient(
+      135deg,
+      #9A5261 0%,
+      #8B3A4A 55%,
+      #63303F 100%
+    );
+}
+
+.gold-gradient {
+  background:
+    linear-gradient(
+      135deg,
+      #E8D39A,
+      #D6B56A
+    );
+}
+
+.soft-cream-bg {
+  background: #FCF8F5;
+}
+
+.soft-rose-bg {
+  background: #F4E4E7;
+}
+
+.soft-gold-bg {
+  background: #F7EFD9;
+}
+
+
+/* =========================================================
+   SOFT BUTTONS
+========================================================= */
+
+.btn-primary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  min-height: 42px;
+
+  padding: 0.65rem 1.1rem;
+
+  border-radius: 0.75rem;
+
+  background: var(--brand-primary);
+  color: #ffffff;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 5px 14px rgba(139, 58, 74, 0.14);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--brand-primary-hover);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 18px rgba(139, 58, 74, 0.18);
+}
+
+
+.btn-gold {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  min-height: 42px;
+
+  padding: 0.65rem 1.1rem;
+
+  border-radius: 0.75rem;
+
+  background: var(--brand-gold);
+  color: #4A1F2A;
+
+  font-weight: 700;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-gold:hover {
+  background: var(--brand-gold-light);
+
+  transform: translateY(-1px);
+}
+
+
+.btn-secondary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  min-height: 42px;
+
+  padding: 0.65rem 1.1rem;
+
+  border-radius: 0.75rem;
+
+  background: var(--brand-rose-soft);
+  color: var(--brand-primary);
+
+  font-weight: 700;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--brand-rose-light);
+
+  transform: translateY(-1px);
+}
+
+
+.btn-outline-gold {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  min-height: 42px;
+
+  padding: 0.65rem 1.1rem;
+
+  border-radius: 0.75rem;
+
+  border: 1px solid rgba(214, 181, 106, 0.5);
+
+  background: transparent;
+
+  color: var(--brand-primary);
+
+  font-weight: 700;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-outline-gold:hover {
+  background: var(--brand-gold-soft);
+
+  border-color: var(--brand-gold);
+}
+
+
+/* =========================================================
+   FORM DESIGN
+========================================================= */
+
+.input-matrimonial,
+.select-matrimonial {
+  width: 100%;
+
+  min-height: 44px;
+
+  padding: 0.65rem 0.9rem;
+
+  border-radius: 0.75rem;
+
+  border: 1px solid rgba(118, 102, 106, 0.18);
+
+  background: var(--brand-surface);
+
+  color: var(--brand-text);
+
+  font-size: 16px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.input-matrimonial:focus,
+.select-matrimonial:focus {
+  border-color: var(--brand-rose);
+
+  box-shadow:
+    0 0 0 3px rgba(201, 130, 145, 0.12);
+}
+
+.dark .input-matrimonial,
+.dark .select-matrimonial {
+  background: var(--brand-dark-surface);
+
+  border-color: rgba(232, 211, 154, 0.14);
+
+  color: var(--brand-dark-text);
+}
+
+textarea.input-matrimonial {
+  min-height: 120px;
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE SYSTEM
+========================================================= */
+
+@media (max-width: 639px) {
+
+  html {
+    font-size: 15px;
+  }
+
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+
+  /* ---------- Container ---------- */
+
+  .page-container {
+    width: 100%;
+    max-width: 100%;
+
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+
+
+  /* ---------- Typography ---------- */
+
+  h1 {
+    font-size: 1.9rem;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  .font-serif-brand {
+    line-height: 1.2;
+  }
+
+  .font-tamil {
+    line-height: 1.8;
+  }
+
+
+  /* ---------- Sections ---------- */
+
+  section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  /* ---------- Cards ---------- */
+
+  .card-matrimonial {
+    border-radius: 1rem;
+  }
+
+  .glass-matrimonial {
+    border-radius: 1rem;
+  }
+
+
+  /* ---------- Buttons ---------- */
+
+  .btn-primary,
+  .btn-gold,
+  .btn-secondary,
+  .btn-outline-gold {
+    width: auto;
+
+    min-height: 44px;
+
+    padding: 0.65rem 0.95rem;
+
+    border-radius: 0.7rem;
+
+    font-size: 0.875rem;
+  }
+
+  .mobile-full-button {
+    width: 100%;
+  }
+
+
+  /* ---------- Inputs ---------- */
+
+  .input-matrimonial,
+  .select-matrimonial {
+    min-height: 46px;
+
+    width: 100%;
+
+    font-size: 16px;
+  }
+
+  textarea.input-matrimonial {
+    min-height: 120px;
+  }
+
+
+  /* ---------- Forms ---------- */
+
+  .mobile-form-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 0.75rem;
+  }
+
+
+  /* ---------- Profile Cards ---------- */
+
+  .profile-card-mobile {
+    width: 100%;
+
+    border-radius: 1rem;
+
+    overflow: hidden;
+  }
+
+  .profile-card-mobile img {
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+
+    object-fit: cover;
+  }
+
+
+  /* ---------- Search ---------- */
+
+  .mobile-search-panel {
+    width: 100%;
+
+    padding: 0.9rem;
+
+    border-radius: 1rem;
+  }
+
+  .mobile-search-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 0.65rem;
+  }
+
+
+  /* ---------- Modal ---------- */
+
+  .mobile-modal {
+    width: 100%;
+    max-width: 100%;
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+
+
+  /* ---------- Chat ---------- */
+
+  .mobile-chat {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100dvh;
+
+    max-width: 100%;
+
+    border-radius: 0;
+
+    z-index: 100;
+  }
+
+
+  /* ---------- Tables ---------- */
+
+  .mobile-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+  /* ---------- Horizontal Lists ---------- */
+
+  .mobile-horizontal-scroll {
+    display: flex;
+
+    gap: 0.65rem;
+
+    overflow-x: auto;
+
+    padding-bottom: 0.4rem;
+
+    scroll-snap-type: x proximity;
+
+    scrollbar-width: none;
+  }
+
+  .mobile-horizontal-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-horizontal-scroll > * {
+    flex: 0 0 auto;
+
+    scroll-snap-align: start;
+  }
+
+
+  /* =====================================================
+     MOBILE BOTTOM NAV
+  ===================================================== */
+
+  .mobile-bottom-nav {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 80;
+
+    width: 100%;
+
+    padding-top: 0.4rem;
+
+    padding-left:
+      max(0.45rem, env(safe-area-inset-left));
+
+    padding-right:
+      max(0.45rem, env(safe-area-inset-right));
+
+    padding-bottom:
+      max(0.4rem, env(safe-area-inset-bottom));
+
+    background: rgba(255, 253, 252, 0.96);
+
+    border-top:
+      1px solid rgba(139, 58, 74, 0.10);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+      0 -5px 20px rgba(74, 31, 42, 0.05);
+  }
+
+  .dark .mobile-bottom-nav {
+    background: rgba(23, 16, 19, 0.97);
+
+    border-top-color:
+      rgba(232, 211, 154, 0.13);
+
+    box-shadow:
+      0 -5px 20px rgba(0, 0, 0, 0.15);
+  }
+
+
+  /* ---------- Bottom Navigation Content ---------- */
+
+  .mobile-bottom-nav-inner {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    align-items: center;
+
+    width: 100%;
+  }
+
+  .mobile-bottom-nav-item {
+    min-height: 50px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.15rem;
+
+    border-radius: 0.7rem;
+
+    color: #8B7B7F;
+
+    font-size: 0.63rem;
+
+    font-weight: 600;
+
+    transition:
+      color 0.2s ease,
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .mobile-bottom-nav-item:active {
+    transform: scale(0.96);
+  }
+
+  .mobile-bottom-nav-item.active {
+    color: var(--brand-primary);
+
+    background:
+      rgba(139, 58, 74, 0.06);
+  }
+
+  .dark .mobile-bottom-nav-item {
+    color: #BBA9AD;
+  }
+
+  .dark .mobile-bottom-nav-item.active {
+    color: var(--brand-gold-light);
+
+    background:
+      rgba(214, 181, 106, 0.08);
+  }
+
+
+  /* ---------- Main Content ---------- */
+
+  main {
+    width: 100%;
+
+    max-width: 100%;
+
+    overflow-x: hidden;
+
+    padding-bottom: 0;
+  }
+
+
+  /* ---------- Images ---------- */
+
+  img {
+    max-width: 100%;
+
+    height: auto;
+  }
+
+
+  /* ---------- Visibility ---------- */
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+
+
+  /* ---------- Spacing ---------- */
+
+  .mobile-section {
+    padding-top: 2.5rem;
+
+    padding-bottom: 2.5rem;
+  }
+
+
+  /* ---------- Touch Targets ---------- */
+
+  button,
+  a,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:not(.no-touch-size),
+  [role="button"]:not(.no-touch-size) {
+    min-height: 44px;
+  }
+
+
+  /* ---------- Long Text ---------- */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  span,
+  a {
+    overflow-wrap: anywhere;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .page-container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .mobile-bottom-nav-item {
+    font-size: 0.56rem;
+  }
+
+  .mobile-bottom-nav-item svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+/* =========================================================
+   TABLETS
+========================================================= */
+
+@media (min-width: 640px) and (max-width: 1023px) {
+
+  .page-container {
+    padding-left: 1.5rem;
+
+    padding-right: 1.5rem;
+  }
+
+  .tablet-two-column {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 1rem;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 1024px) {
+
+  .page-container {
+    padding-left: 2rem;
+
+    padding-right: 2rem;
+  }
+}
+
+
+/* =========================================================
+   SAFE AREA
+========================================================= */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+
+  .mobile-safe-bottom {
+    padding-bottom:
+      env(safe-area-inset-bottom);
+  }
+
+  .mobile-safe-top {
+    padding-top:
+      env(safe-area-inset-top);
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}
