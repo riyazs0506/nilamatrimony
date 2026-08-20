@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+
 import {
   Menu,
   X,
@@ -12,12 +13,33 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { KolamMotif } from './KolamMotif';
 
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
 export const Navbar: React.FC = () => {
-  const { t, language, setLanguage } = useLanguage();
-  const { theme, toggleTheme } = useTheme();
+
+  const {
+    t,
+    language,
+    setLanguage,
+  } = useLanguage();
+
+  const {
+    theme,
+    toggleTheme,
+  } = useTheme();
+
   const location = useLocation();
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] =
+    useState(false);
+
+
+  /* =========================================================
+     NAVIGATION
+  ========================================================= */
 
   const navigation = [
     {
@@ -54,7 +76,13 @@ export const Navbar: React.FC = () => {
     },
   ];
 
+
+  /* =========================================================
+     ACTIVE ROUTE
+  ========================================================= */
+
   const isActive = (path: string): boolean => {
+
     if (path === '/') {
       return location.pathname === '/';
     }
@@ -65,25 +93,59 @@ export const Navbar: React.FC = () => {
     );
   };
 
+
+  /* =========================================================
+     MOBILE MENU
+  ========================================================= */
+
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
+
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen((current) => !current);
   };
 
-  /*
-   * Close mobile menu when route changes.
-   */
+
+  /* =========================================================
+     LANGUAGE SWITCH
+  ========================================================= */
+
+  const handleLanguageChange = (
+    nextLanguage: 'en' | 'ta'
+  ) => {
+
+    if (language === nextLanguage) {
+      return;
+    }
+
+    setLanguage(nextLanguage);
+
+    /*
+      Close mobile menu after language change.
+      This prevents the old-language menu from
+      remaining visible.
+    */
+    setMobileMenuOpen(false);
+  };
+
+
+  /* =========================================================
+     CLOSE MENU WHEN ROUTE CHANGES
+  ========================================================= */
+
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  /*
-   * Prevent page scrolling while mobile menu is open.
-   */
+
+  /* =========================================================
+     LOCK BODY SCROLL
+  ========================================================= */
+
   useEffect(() => {
+
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -93,13 +155,19 @@ export const Navbar: React.FC = () => {
     return () => {
       document.body.style.overflow = '';
     };
+
   }, [mobileMenuOpen]);
+
+
+  /* =========================================================
+     RENDER
+  ========================================================= */
 
   return (
     <>
       {/* =====================================================
-          FIXED NAVBAR
-      ===================================================== */}
+          NAVBAR
+      ====================================================== */}
 
       <header
         className="
@@ -108,31 +176,51 @@ export const Navbar: React.FC = () => {
           left-0
           right-0
           z-[100]
+
           w-full
-          h-16
-          lg:h-[72px]
+          h-[68px]
+          xl:h-[72px]
+
           border-b
           border-[#8B3A4A]/10
+          dark:border-[#D6B56A]/10
+
           bg-[#FCF8F5]/95
           dark:bg-[#171013]/95
+
           backdrop-blur-xl
         "
       >
 
-        <div className="page-container h-full">
+        {/* ===================================================
+            NAVBAR INNER
+        ==================================================== */}
 
-          {/* =================================================
-              NAVBAR CONTENT
-          ================================================= */}
+        <div
+          className="
+            h-full
+            w-full
+
+            max-w-[1600px]
+
+            mx-auto
+
+            px-3
+            sm:px-4
+            xl:px-5
+            2xl:px-6
+          "
+        >
 
           <div
             className="
               h-full
+
               flex
               items-center
-              justify-between
-              gap-3
-              lg:gap-5
+
+              gap-2
+              xl:gap-3
             "
           >
 
@@ -143,38 +231,54 @@ export const Navbar: React.FC = () => {
             <Link
               to="/"
               onClick={closeMobileMenu}
+              aria-label={t('brandName')}
               className="
+                group
+
                 flex
                 items-center
-                gap-2.5
-                min-w-0
+                gap-2
+
                 shrink-0
-                group
+                min-w-0
+
+                w-[210px]
+                xl:w-[235px]
+                2xl:w-[250px]
               "
-              aria-label={t('brandName')}
             >
 
-              {/* Fixed Logo */}
+              {/* Logo */}
+
               <div
                 className="
+                  shrink-0
+
                   w-10
                   h-10
-                  lg:w-11
-                  lg:h-11
-                  shrink-0
+
+                  xl:w-11
+                  xl:h-11
+
                   rounded-xl
+
                   bg-gradient-to-br
                   from-[#8B3A4A]
                   via-[#754052]
                   to-[#4A1F2A]
+
                   border
                   border-[#D6B56A]/45
+
                   flex
                   items-center
                   justify-center
+
                   shadow-sm
+
                   transition-all
                   duration-200
+
                   group-hover:border-[#D6B56A]/75
                 "
               >
@@ -187,37 +291,53 @@ export const Navbar: React.FC = () => {
               </div>
 
 
-              {/* Brand */}
-              <div className="min-w-0">
+              {/* Brand Text */}
+
+              <div className="min-w-0 flex-1">
 
                 <div
                   className="
                     font-serif-brand
-                    text-[0.78rem]
-                    lg:text-sm
+
+                    text-[13px]
+                    xl:text-[14px]
+                    2xl:text-[15px]
+
                     font-bold
                     tracking-wide
+
                     leading-tight
+
                     text-[#8B3A4A]
                     dark:text-[#E8D39A]
-                    truncate
-                    max-w-[170px]
-                    sm:max-w-[210px]
+
+                    whitespace-nowrap
+                    overflow-hidden
+                    text-ellipsis
                   "
                 >
                   {t('brandName')}
                 </div>
 
+
                 <div
                   className="
                     hidden
                     sm:block
+
                     mt-0.5
-                    text-[9px]
+
+                    text-[8px]
+                    xl:text-[9px]
+
                     text-[#76666A]
                     dark:text-[#C9B8B8]
+
                     leading-tight
-                    truncate
+
+                    whitespace-nowrap
+                    overflow-hidden
+                    text-ellipsis
                   "
                 >
                   {t('brandTagline')}
@@ -230,16 +350,30 @@ export const Navbar: React.FC = () => {
 
             {/* =================================================
                 DESKTOP NAVIGATION
+
+                XL ONLY
+
+                This prevents the navbar from becoming crowded
+                on tablets and smaller laptops.
             ================================================= */}
 
             <nav
               className="
                 hidden
-                lg:flex
+                xl:flex
+
                 flex-1
+                min-w-0
+
+                h-full
+
                 items-center
-                justify-center
+                justify-end
+
                 gap-0.5
+                2xl:gap-1
+
+                overflow-visible
               "
               aria-label="Main navigation"
             >
@@ -252,51 +386,87 @@ export const Navbar: React.FC = () => {
                   <Link
                     key={item.path}
                     to={item.path}
+
                     className={`
                       relative
-                      px-2.5
-                      xl:px-3
-                      py-2
+
+                      shrink-0
+
+                      flex
+                      items-center
+                      justify-center
+
+                      h-10
+
+                      px-2
+                      2xl:px-2.5
+
                       rounded-lg
-                      text-[0.78rem]
-                      xl:text-sm
+
+                      text-[11px]
+                      2xl:text-[12px]
+
                       font-semibold
+
                       whitespace-nowrap
+
                       transition-all
                       duration-200
 
                       ${
                         active
                           ? `
-                            text-[#8B3A4A]
                             bg-[#F4E4E7]
-                            dark:text-[#E8D39A]
+                            text-[#8B3A4A]
+
                             dark:bg-[#D6B56A]/10
+                            dark:text-[#E8D39A]
                           `
                           : `
                             text-[#5F5054]
-                            hover:text-[#8B3A4A]
+
                             hover:bg-[#F7EFD9]
+                            hover:text-[#8B3A4A]
+
                             dark:text-[#D2C4C5]
-                            dark:hover:text-[#E8D39A]
+
                             dark:hover:bg-white/5
+                            dark:hover:text-[#E8D39A]
                           `
                       }
                     `}
                   >
 
-                    {item.label}
+                    <span
+                      className="
+                        font-tamil
+
+                        leading-5
+
+                        whitespace-nowrap
+                      "
+                    >
+                      {item.label}
+                    </span>
+
+
+                    {/* Active underline */}
 
                     {active && (
                       <span
                         className="
                           absolute
+
                           left-1/2
                           -translate-x-1/2
+
                           bottom-0.5
+
                           w-5
-                          h-0.5
+                          h-[2px]
+
                           rounded-full
+
                           bg-[#D6B56A]
                         "
                       />
@@ -304,55 +474,76 @@ export const Navbar: React.FC = () => {
 
                   </Link>
                 );
+
               })}
 
             </nav>
 
 
             {/* =================================================
-                RIGHT ACTIONS
+                ACTIONS
             ================================================= */}
 
             <div
               className="
                 flex
                 items-center
+
                 gap-1.5
+
                 shrink-0
               "
             >
 
-              {/* Language */}
+              {/* =================================================
+                  LANGUAGE BUTTON
+              ================================================= */}
+
               <button
                 type="button"
+
                 onClick={() =>
-                  setLanguage(
+                  handleLanguageChange(
                     language === 'en'
                       ? 'ta'
                       : 'en'
                   )
                 }
+
                 className="
                   hidden
                   sm:flex
+
                   items-center
                   justify-center
+
                   w-10
                   h-10
+
                   rounded-xl
+
                   border
-                  border-[#8B3A4A]/12
-                  dark:border-[#E8D39A]/15
+                  border-[#8B3A4A]/20
+                  dark:border-[#D6B56A]/25
+
                   bg-transparent
-                  text-[11px]
-                  font-bold
-                  text-[#5F5054]
+
+                  text-[#8B3A4A]
                   dark:text-[#E8D39A]
+
+                  text-[11px]
+
+                  font-bold
+
                   hover:bg-[#F7EFD9]
-                  hover:border-[#D6B56A]/50
-                  dark:hover:bg-white/5
+                  hover:border-[#D6B56A]/60
+
+                  dark:hover:bg-[#D6B56A]/10
+
                   transition-all
                   duration-200
+
+                  active:scale-95
                 "
                 aria-label={
                   language === 'en'
@@ -360,32 +551,51 @@ export const Navbar: React.FC = () => {
                     : 'Switch to English'
                 }
               >
-                {language === 'en' ? 'தமிழ்' : 'EN'}
+
+                {language === 'en'
+                  ? 'தமிழ்'
+                  : 'EN'}
+
               </button>
 
 
-              {/* Theme */}
+              {/* =================================================
+                  THEME BUTTON
+              ================================================= */}
+
               <button
                 type="button"
                 onClick={toggleTheme}
+
                 className="
                   flex
+
                   items-center
                   justify-center
+
                   w-10
                   h-10
+
                   rounded-xl
+
                   border
-                  border-[#8B3A4A]/12
-                  dark:border-[#E8D39A]/15
+                  border-[#8B3A4A]/20
+                  dark:border-[#D6B56A]/25
+
                   bg-transparent
+
                   text-[#8B3A4A]
                   dark:text-[#E8D39A]
+
                   hover:bg-[#F7EFD9]
-                  hover:border-[#D6B56A]/50
-                  dark:hover:bg-white/5
+                  hover:border-[#D6B56A]/60
+
+                  dark:hover:bg-[#D6B56A]/10
+
                   transition-all
                   duration-200
+
+                  active:scale-95
                 "
                 aria-label={
                   theme === 'dark'
@@ -395,51 +605,79 @@ export const Navbar: React.FC = () => {
               >
 
                 {theme === 'dark' ? (
-                  <Sun className="w-4 h-4" />
+                  <Sun
+                    className="w-[17px] h-[17px]"
+                    aria-hidden="true"
+                  />
                 ) : (
-                  <Moon className="w-4 h-4" />
+                  <Moon
+                    className="w-[17px] h-[17px]"
+                    aria-hidden="true"
+                  />
                 )}
 
               </button>
 
 
-              {/* Mobile Menu */}
+              {/* =================================================
+                  MOBILE MENU BUTTON
+              ================================================= */}
+
               <button
                 type="button"
+
                 onClick={toggleMobileMenu}
+
                 className="
-                  lg:hidden
                   flex
+                  xl:hidden
+
                   items-center
                   justify-center
+
                   w-10
                   h-10
+
                   rounded-xl
+
                   border
-                  border-[#8B3A4A]/12
-                  dark:border-[#E8D39A]/15
+                  border-[#8B3A4A]/20
+                  dark:border-[#D6B56A]/25
+
                   bg-transparent
-                  text-[#5F5054]
+
+                  text-[#8B3A4A]
                   dark:text-[#E8D39A]
+
                   hover:bg-[#F7EFD9]
-                  hover:border-[#D6B56A]/50
-                  dark:hover:bg-white/5
+
+                  dark:hover:bg-[#D6B56A]/10
+
                   transition-all
                   duration-200
+
                   active:scale-95
                 "
+
                 aria-label={
                   mobileMenuOpen
                     ? 'Close navigation menu'
                     : 'Open navigation menu'
                 }
+
                 aria-expanded={mobileMenuOpen}
               >
 
                 {mobileMenuOpen ? (
-                  <X className="w-5 h-5" />
+                  <X
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                  />
                 ) : (
-                  <Menu className="w-5 h-5" />
+                  <Menu
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                  />
                 )}
 
               </button>
@@ -449,39 +687,55 @@ export const Navbar: React.FC = () => {
           </div>
 
 
-          {/* =================================================
+          {/* ===================================================
               MOBILE MENU
-          ================================================= */}
+          ==================================================== */}
 
           {mobileMenuOpen && (
+
             <div
               className="
                 absolute
-                top-16
+
+                top-[68px]
                 left-0
                 right-0
-                lg:hidden
+
+                xl:hidden
+
                 border-t
                 border-[#8B3A4A]/10
+                dark:border-[#D6B56A]/10
+
                 bg-[#FCF8F5]
                 dark:bg-[#171013]
-                shadow-xl
+
+                shadow-2xl
               "
             >
 
               <nav
                 className="
-                  page-container
-                  py-2.5
+                  w-full
+
+                  max-h-[calc(100vh-68px)]
+
+                  overflow-y-auto
+
+                  px-4
+                  py-3
+
                   flex
                   flex-col
+
                   gap-1
-                  max-h-[calc(100vh-64px)]
-                  overflow-y-auto
-                  pb-4
                 "
                 aria-label="Mobile navigation"
               >
+
+                {/* =================================================
+                    MOBILE LINKS
+                ================================================= */}
 
                 {navigation.map((item) => {
 
@@ -490,19 +744,27 @@ export const Navbar: React.FC = () => {
                   return (
                     <Link
                       key={item.path}
+
                       to={item.path}
+
                       onClick={closeMobileMenu}
+
                       className={`
-                        group
                         flex
                         items-center
                         justify-between
-                        min-h-12
+
+                        min-h-11
+
                         px-4
                         py-2
+
                         rounded-xl
+
                         text-sm
+
                         font-semibold
+
                         transition-all
                         duration-200
 
@@ -516,6 +778,7 @@ export const Navbar: React.FC = () => {
                             : `
                               text-[#5F5054]
                               dark:text-[#D2C4C5]
+
                               hover:bg-[#F4E4E7]
                               dark:hover:bg-white/5
                             `
@@ -523,126 +786,188 @@ export const Navbar: React.FC = () => {
                       `}
                     >
 
-                      <span className="font-tamil leading-6">
+                      <span
+                        className="
+                          font-tamil
+                          leading-6
+                        "
+                      >
                         {item.label}
                       </span>
+
 
                       <ChevronRight
                         className={`
                           w-4
                           h-4
+
                           shrink-0
-                          transition-transform
 
                           ${
                             active
                               ? 'text-[#E8D39A]'
-                              : 'text-[#A99A9D] group-hover:translate-x-0.5'
+                              : 'text-[#A99A9D]'
                           }
                         `}
+                        aria-hidden="true"
                       />
 
                     </Link>
                   );
+
                 })}
 
 
-                {/* Divider */}
+                {/* =================================================
+                    DIVIDER
+                ================================================= */}
+
                 <div
                   className="
-                    my-1.5
+                    my-1
+
                     border-t
+
                     border-[#8B3A4A]/10
                     dark:border-white/10
                   "
                 />
 
 
-                {/* Language */}
+                {/* =================================================
+                    MOBILE LANGUAGE
+                ================================================= */}
+
                 <button
                   type="button"
+
                   onClick={() =>
-                    setLanguage(
+                    handleLanguageChange(
                       language === 'en'
                         ? 'ta'
                         : 'en'
                     )
                   }
+
                   className="
                     flex
                     items-center
                     justify-between
-                    min-h-12
+
+                    min-h-11
+
                     px-4
                     py-2
+
                     rounded-xl
+
                     text-sm
                     font-semibold
+
                     text-[#5F5054]
                     dark:text-[#D2C4C5]
+
                     hover:bg-[#F4E4E7]
                     dark:hover:bg-white/5
-                    transition
+
+                    transition-all
                   "
                 >
 
-                  <span>
+                  <span className="font-tamil">
+
                     {language === 'en'
-                      ? 'தமிழ்'
-                      : 'English'}
+                      ? 'தமிழுக்கு மாற்று'
+                      : 'ஆங்கிலத்திற்கு மாற்று'}
+
                   </span>
+
 
                   <span
                     className="
-                      text-xs
-                      font-bold
+                      flex
+                      items-center
+                      justify-center
+
+                      min-w-9
+                      h-8
+
+                      px-2
+
+                      rounded-lg
+
+                      bg-[#F7EFD9]
+                      dark:bg-[#D6B56A]/10
+
                       text-[#8B3A4A]
                       dark:text-[#E8D39A]
+
+                      text-xs
+                      font-bold
                     "
                   >
+
                     {language === 'en'
                       ? 'தமிழ்'
                       : 'EN'}
+
                   </span>
 
                 </button>
 
 
-                {/* Theme */}
+                {/* =================================================
+                    MOBILE THEME
+                ================================================= */}
+
                 <button
                   type="button"
                   onClick={toggleTheme}
+
                   className="
                     flex
                     items-center
                     justify-between
-                    min-h-12
+
+                    min-h-11
+
                     px-4
                     py-2
+
                     rounded-xl
+
                     text-sm
                     font-semibold
+
                     text-[#5F5054]
                     dark:text-[#D2C4C5]
+
                     hover:bg-[#F4E4E7]
                     dark:hover:bg-white/5
-                    transition
+
+                    transition-all
                   "
                 >
 
                   <span>
+
                     {theme === 'dark'
                       ? 'Light Mode'
                       : 'Dark Mode'}
+
                   </span>
+
 
                   <span
                     className="
-                      w-8
+                      w-9
                       h-8
+
                       rounded-lg
+
                       bg-[#F7EFD9]
                       dark:bg-[#D6B56A]/10
+
                       flex
                       items-center
                       justify-center
@@ -650,9 +975,23 @@ export const Navbar: React.FC = () => {
                   >
 
                     {theme === 'dark' ? (
-                      <Sun className="w-4 h-4 text-[#E8D39A]" />
+                      <Sun
+                        className="
+                          w-4
+                          h-4
+                          text-[#E8D39A]
+                        "
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <Moon className="w-4 h-4 text-[#8B3A4A]" />
+                      <Moon
+                        className="
+                          w-4
+                          h-4
+                          text-[#8B3A4A]
+                        "
+                        aria-hidden="true"
+                      />
                     )}
 
                   </span>
@@ -662,6 +1001,7 @@ export const Navbar: React.FC = () => {
               </nav>
 
             </div>
+
           )}
 
         </div>
@@ -671,26 +1011,51 @@ export const Navbar: React.FC = () => {
 
       {/* =====================================================
           MOBILE BACKDROP
-      ===================================================== */}
+      ====================================================== */}
 
       {mobileMenuOpen && (
+
         <button
           type="button"
+
           aria-label="Close mobile navigation"
+
           onClick={closeMobileMenu}
+
           className="
-            lg:hidden
+            xl:hidden
+
             fixed
             inset-0
-            top-16
+
+            top-[68px]
+
             z-[90]
+
             bg-black/10
             dark:bg-black/40
+
             backdrop-blur-[1px]
           "
         />
+
       )}
+
+
+      {/* =====================================================
+          NAVBAR SPACER
+      ====================================================== */}
+
+      <div
+        className="
+          h-[68px]
+          xl:h-[72px]
+        "
+        aria-hidden="true"
+      />
 
     </>
   );
 };
+
+export default Navbar;
